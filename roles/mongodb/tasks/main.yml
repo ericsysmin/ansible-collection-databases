@@ -1,0 +1,15 @@
+---
+# tasks file for mongodb
+
+- name: MongoDB | OS Specific variables
+  ansible.builtin.include_vars: "{{ ansible_distribution|lower }}.yml"
+
+- name: MongoDB | OS Specific install
+  ansible.builtin.include_tasks: "{{ ansible_os_family|lower }}.yml"
+
+- name: MongoDB | Configure MongoDB service
+  ansible.builtin.service:
+    name: mongod
+    state: started
+    enabled: true
+  when: mongodb_install_service

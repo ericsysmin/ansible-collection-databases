@@ -1,0 +1,26 @@
+---
+- name: PostgreSQL | Install postgresql dependencies
+  ansible.builtin.apt:
+    name:
+      - curl
+      - ca-certificates
+      - gnupg
+
+- name: PostgreSQL | Add apt key
+  ansible.builtin.apt_key:
+    url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
+    state: present
+
+- name: PostgreSQL | Add postgresql repository
+  ansible.builtin.apt_repository:
+    repo: deb http://apt.postgresql.org/pub/repos/apt {{ ansible_distribution_release }}-pgdg main
+    state: present
+    filename: pgdg
+    update_cache: true
+
+- name: PostgreSQL | Install postgresql
+  ansible.builtin.apt:
+    name:
+      - postgresql-{{ postgresql_version }}
+      - "{{ postgresql_psycopg2 }}"
+    update_cache: true
