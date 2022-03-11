@@ -2,7 +2,9 @@
 
 - name: MongoDB | Install dependent package
   ansible.builtin.apt:
-    name: gnupg
+    name:
+      - gnupg
+      - apt-transport-https
 
 - name: MongoDB | Import apt key
   ansible.builtin.apt_key:
