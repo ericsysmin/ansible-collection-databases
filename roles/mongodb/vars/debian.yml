@@ -1,2 +1,2 @@
 ---
-mongodb_repository: "deb https://repo.mongodb.org/apt/debian {{ ansible_distribution_release }}/mongodb-org/{{ mongodb_ver }} multiverse"
+mongodb_repository: "deb https://repo.mongodb.org/apt/debian {{ ansible_distribution_release }}/mongodb-org/{{ mongodb_ver }} main"
