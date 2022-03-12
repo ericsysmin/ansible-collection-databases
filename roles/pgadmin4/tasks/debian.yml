@@ -20,5 +20,5 @@
 
 - name: pgAdmin4 | Install pgAdmin4
   ansible.builtin.apt:
-    name: pgAdmin4
+    name: pgadmin4
     update_cache: true
