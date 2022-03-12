@@ -2,18 +2,18 @@
 - name: pgAdmin4 | Install postgresql dependencies
   ansible.builtin.apt:
     name:
-      - curl
       - ca-certificates
       - gnupg
+      - apt-transport-https
 
 - name: pgAdmin4 | Add apt key
   ansible.builtin.apt_key:
     url: https://www.pgadmin.org/static/packages_pgadmin_org.pub
     state: present
 
-- name: pgAdmin4 | Add postgresql repository
+- name: pgAdmin4 | Add pgAdmin4 repository
   ansible.builtin.apt_repository:
-    repo: deb https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/{{ ansible_distribution_release }} pgadmin4 main"
+    repo: "deb https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/{{ ansible_distribution_release }} pgadmin4 main"
     state: present
     filename: pgadmin4
     update_cache: true
