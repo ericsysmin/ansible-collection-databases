@@ -8,17 +8,16 @@
 
 - name: pgAdmin4 | Add apt key
   ansible.builtin.apt_key:
-    url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
+    url: https://www.pgadmin.org/static/packages_pgadmin_org.pub
     state: present
 
 - name: pgAdmin4 | Add postgresql repository
   ansible.builtin.apt_repository:
-    repo: deb http://apt.postgresql.org/pub/repos/apt {{ ansible_distribution_release }}-pgdg main
+    repo: deb https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/{{ ansible_distribution_release }} pgadmin4 main"
     state: present
-    filename: pgdg
+    filename: pgadmin4
     update_cache: true
 
 - name: pgAdmin4 | Install pgAdmin4
   ansible.builtin.apt:
     name: pgAdmin4
-    update_cache: true
