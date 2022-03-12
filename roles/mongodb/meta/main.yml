@@ -2,16 +2,14 @@
 galaxy_info:
   author: ericsysmin
   role_name: mongodb
-  company: ericsymsin
   description: This role enables users to install and configure mongodb on their hosts.
   license: MIT
-  min_ansible_version: 2.4
+  min_ansible_version: 2.9
   platforms:
     - name: Ubuntu
       versions:
         - bionic
         - focal
-        - xenial
   galaxy_tags:
     - mongodb
     - database
