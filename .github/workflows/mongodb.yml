@@ -2,14 +2,14 @@ name: "ericsysmin.databases.mongodb"
 on:
   push:
     paths:
-      - 'roles/mongodb/**'
-      - 'molecule/mongodb/**'
-      - '.github/workflows/mongodb.yml'
+      - "roles/mongodb/**"
+      - "molecule/mongodb/**"
+      - ".github/workflows/mongodb.yml"
   pull_request:
     paths:
-      - 'roles/mongodb/**'
-      - 'molecule/mongodb/**'
-      - '.github/workflows/mongodb.yml'
+      - "roles/mongodb/**"
+      - "molecule/mongodb/**"
+      - ".github/workflows/mongodb.yml"
 jobs:
   mongodb:
     runs-on: ubuntu-18.04
@@ -20,11 +20,11 @@ jobs:
       fail-fast: true
       matrix:
         molecule_distro:
-          - { "distro":"ubuntu-16.04", "command":"/sbin/init" }
-          - { "distro":"ubuntu-18.04", "command":"/lib/systemd/systemd" }
-          - { "distro":"ubuntu-20.04", "command":"/lib/systemd/systemd" }
-          - { "distro":"debian-9", "command":"/lib/systemd/systemd" }
-          - { "distro":"debian-10", "command":"/lib/systemd/systemd" }
+          - { "distro": "ubuntu-16.04", "command": "/sbin/init" }
+          - { "distro": "ubuntu-18.04", "command": "/lib/systemd/systemd" }
+          - { "distro": "ubuntu-20.04", "command": "/lib/systemd/systemd" }
+          - { "distro": "debian-9", "command": "/lib/systemd/systemd" }
+          - { "distro": "debian-10", "command": "/lib/systemd/systemd" }
         collection_role:
           - mongodb
     steps:
@@ -44,10 +44,11 @@ jobs:
           curl -fsSL https://get.docker.com -o get-docker.sh
           sudo sh get-docker.sh
           python -m pip install --upgrade pip
-          pip install ansible molecule yamllint ansible-lint docker molecule-docker
+          pip install ansible molecule ansible-lint docker molecule-docker
 
       - name: Run role tests
         run: >-
+          ansible-lint ansible_collections/ericsysmin/databases/roles/${{ matrix.collection_role }} &&
           molecule --version &&
           ansible --version &&
           MOLECULE_COMMAND=${{ matrix.molecule_distro.command }}
