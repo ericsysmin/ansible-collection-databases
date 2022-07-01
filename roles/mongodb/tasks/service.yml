@@ -1,0 +1,11 @@
+---
+- name: MongoDB | Enable MongoDB service
+  ansible.builtin.service:
+    name: mongod
+    enabled: true
+
+- name: MongoDB | Configure /etc/mongo.conf
+  ansible.builtin.template:
+    dest: /etc/mongo.conf
+    mode: 0644
+  notify: MongoDB | Restart Service

@@ -8,8 +8,5 @@
   ansible.builtin.include_tasks: "{{ ansible_os_family|lower }}.yml"
 
 - name: MongoDB | Configure MongoDB service
-  ansible.builtin.service:
-    name: mongod
-    state: started
-    enabled: true
+  ansible.builtin.include_tasks: service.yml
   when: mongodb_install_service

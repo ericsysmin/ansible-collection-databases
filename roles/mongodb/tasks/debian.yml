@@ -1,25 +1,24 @@
 ---
-
-- name: MongoDB | Install dependent package
+- name: MongoDB | Debian | Install dependent package
   ansible.builtin.apt:
     name: gnupg
 
-- name: MongoDB | Import apt key
+- name: MongoDB | Debian | Import apt key
   ansible.builtin.apt_key:
-    url: https://www.mongodb.org/static/pgp/server-{{ mongodb_ver }}.asc
+    url: https://www.mongodb.org/static/pgp/server-{{ mongodb_version }}.asc
 
-- name: MongoDB | Add apt repository
+- name: MongoDB | Debian | Add apt repository
   ansible.builtin.apt_repository:
     repo: "{{ mongodb_repository }}"
-    filename: mongodb-org-{{ mongodb_ver }}
+    filename: mongodb-org-{{ mongodb_version }}
     update_cache: true
 
-- name: MongoDB | Install mongodb-org
-  ansible.builtin.apt:
-    name: mongodb-org
-  when: mongodb_install_service
-
-- name: MongoDB | Install mongodb client
+- name: MongoDB | Debian | Install mongodb client
   ansible.builtin.apt:
     name: mongodb-org-shell
   when: mongodb_install_client
+
+- name: MongoDB | Debian | Install mongodb-org
+  ansible.builtin.apt:
+    name: mongodb-org
+  when: mongodb_install_service
