@@ -11,8 +11,8 @@ on:
       - "molecule/mongodb/**"
       - ".github/workflows/mongodb.yml"
 jobs:
-  molecule:
-    runs-on: ubuntu-20.04
+  mongodb:
+    runs-on: ubuntu-18.04
     env:
       PY_COLORS: 1
       ANSIBLE_FORCE_COLOR: 1
@@ -20,21 +20,24 @@ jobs:
       fail-fast: true
       matrix:
         molecule_distro:
+          - { "distro": "ubuntu-16.04", "command": "/sbin/init" }
           - { "distro": "ubuntu-18.04", "command": "/lib/systemd/systemd" }
           - { "distro": "ubuntu-20.04", "command": "/lib/systemd/systemd" }
+          - { "distro": "debian-9", "command": "/lib/systemd/systemd" }
+          - { "distro": "debian-10", "command": "/lib/systemd/systemd" }
         collection_role:
           - mongodb
     steps:
       - name: Check out code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v1
 
-      - name: Set up Python 3.9
-        uses: actions/setup-python@v4
-        with:
-          python-version: 3.9
-
-      - name: get list of files
+      - name: List dir
         run: ls -lart
+
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
 
       - name: Install dependencies
         run: |
@@ -42,17 +45,13 @@ jobs:
           curl -fsSL https://get.docker.com -o get-docker.sh
           sudo sh get-docker.sh
           python -m pip install --upgrade pip
-          pip install -r python-requirements.txt
-
-      - name: Get Ansible and Molecule Version
-        run: |
-          molecule --version
-          ansible --version
+          pip install ansible molecule ansible-lint docker molecule-docker
 
       - name: Run role tests
         run: >-
-          cd roles/${{ matrix.collection_role }} &&
-          MOLECULE_CONTAINERS_BACKEND=docker
+          ansible-lint roles/${{ matrix.collection_role }} &&
+          molecule --version &&
+          ansible --version &&
           MOLECULE_COMMAND=${{ matrix.molecule_distro.command }}
           MOLECULE_DISTRO=${{ matrix.molecule_distro.distro }}
-          molecule --debug test
+          molecule --debug test -s ${{ matrix.collection_role }}
