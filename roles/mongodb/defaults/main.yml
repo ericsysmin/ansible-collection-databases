@@ -5,7 +5,7 @@ mongodb_install_service: true
 mongodb_install_client: true
 mongodb_version: 4.4
 
-mongo_conf: |
+mongo_config: |
   # Where and how to store data.
   storage:
     dbPath: /var/lib/mongodb

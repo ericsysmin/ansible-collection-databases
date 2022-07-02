@@ -6,6 +6,7 @@
 
 - name: MongoDB | Configure /etc/mongo.conf
   ansible.builtin.template:
+    src: mongo.conf.j2
     dest: /etc/mongo.conf
     mode: 0644
   notify: MongoDB | Restart Service
