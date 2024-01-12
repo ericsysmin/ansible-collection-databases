@@ -1,4 +1,5 @@
 ---
+# code: language=ansible
 
 - name: MongoDB | Install dependent package
   ansible.builtin.apt:

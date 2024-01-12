@@ -1,4 +1,6 @@
 ---
+# code: language=ansible
+
 # defaults file for postgresql
 
 postgresql_version: 12

@@ -1,15 +1,16 @@
-name: "ericsysmin.databases.pgadmin4"
+---
+name: ericsysmin.databases.pgadmin4
 on:
   push:
     paths:
-      - 'roles/pgadmin4/**'
-      - 'molecule/pgadmin4/**'
-      - '.github/workflows/pgadmin4.yml'
+      - roles/pgadmin4/**
+      - molecule/pgadmin4/**
+      - .github/workflows/pgadmin4.yml
   pull_request:
     paths:
-      - 'roles/pgadmin4/**'
-      - 'molecule/pgadmin4/**'
-      - '.github/workflows/pgadmin4.yml'
+      - roles/pgadmin4/**
+      - molecule/pgadmin4/**
+      - .github/workflows/pgadmin4.yml
 jobs:
   pgadmin4:
     runs-on: ubuntu-18.04
@@ -20,11 +21,11 @@ jobs:
       fail-fast: true
       matrix:
         molecule_distro:
-          - { "distro":"ubuntu-16.04", "command":"/sbin/init" }
-          - { "distro":"ubuntu-18.04", "command":"/lib/systemd/systemd" }
-          - { "distro":"ubuntu-20.04", "command":"/lib/systemd/systemd" }
-          - { "distro":"debian-9", "command":"/lib/systemd/systemd" }
-          - { "distro":"debian-10", "command":"/lib/systemd/systemd" }
+          - { distro: ubuntu-16.04, command: /sbin/init }
+          - { distro: ubuntu-18.04, command: /lib/systemd/systemd }
+          - { distro: ubuntu-20.04, command: /lib/systemd/systemd }
+          - { distro: debian-9, command: /lib/systemd/systemd }
+          - { distro: debian-10, command: /lib/systemd/systemd }
         collection_role:
           - pgadmin4
     steps:

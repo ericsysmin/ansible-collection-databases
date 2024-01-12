@@ -1,8 +1,10 @@
 ---
+# code: language=ansible
+
 # tasks file for postgresql
 
 - name: PostgreSQL | OS Specific installation
-  ansible.builtin.include_tasks: "{{ ansible_os_family|lower }}/main.yml"
+  ansible.builtin.include_tasks: "{{ ansible_os_family | lower }}/main.yml"
 
 - name: PostgreSQL | Ensure PostgreSQL is started and enabled on boot.
   ansible.builtin.service:

@@ -1,4 +1,6 @@
 ---
+# code: language=ansible
+
 dependency:
   name: galaxy
 driver:

@@ -1,15 +1,16 @@
-name: "ericsysmin.databases.postgresql"
+---
+name: ericsysmin.databases.postgresql
 on:
   push:
     paths:
-      - 'roles/postgresql/**'
-      - 'molecule/postgresql/**'
-      - '.github/workflows/postgresql.yml'
+      - roles/postgresql/**
+      - molecule/postgresql/**
+      - .github/workflows/postgresql.yml
   pull_request:
     paths:
-      - 'roles/postgresql/**'
-      - 'molecule/postgresql/**'
-      - '.github/workflows/postgresql.yml'
+      - roles/postgresql/**
+      - molecule/postgresql/**
+      - .github/workflows/postgresql.yml
 jobs:
   postgresql:
     runs-on: ubuntu-18.04
@@ -20,11 +21,11 @@ jobs:
       fail-fast: true
       matrix:
         molecule_distro:
-          - { "distro":"ubuntu-16.04", "command":"/sbin/init" }
-          - { "distro":"ubuntu-18.04", "command":"/lib/systemd/systemd" }
-          - { "distro":"ubuntu-20.04", "command":"/lib/systemd/systemd" }
-          - { "distro":"debian-9", "command":"/lib/systemd/systemd" }
-          - { "distro":"debian-10", "command":"/lib/systemd/systemd" }
+          - { distro: ubuntu-16.04, command: /sbin/init }
+          - { distro: ubuntu-18.04, command: /lib/systemd/systemd }
+          - { distro: ubuntu-20.04, command: /lib/systemd/systemd }
+          - { distro: debian-9, command: /lib/systemd/systemd }
+          - { distro: debian-10, command: /lib/systemd/systemd }
         collection_role:
           - postgresql
     steps:

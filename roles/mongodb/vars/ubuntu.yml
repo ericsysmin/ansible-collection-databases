@@ -1,2 +1,4 @@
 ---
-mongodb_repository: "deb https://repo.mongodb.org/apt/ubuntu {{ ansible_distribution_release }}/mongodb-org/{{ mongodb_ver }} multiverse"
+# code: language=ansible
+
+mongodb_repository: deb https://repo.mongodb.org/apt/ubuntu {{ ansible_distribution_release }}/mongodb-org/{{ mongodb_ver }} multiverse
