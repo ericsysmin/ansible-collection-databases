@@ -1,0 +1,12 @@
+---
+# code: language=ansible
+
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+  tasks:
+    - name: Initialize role without actually running it
+      ansible.builtin.include_role:
+        name: ericsysmin.databases.pgadmin4
+        tasks_from: init

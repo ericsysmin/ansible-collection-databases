@@ -12,5 +12,7 @@
       until: task_result is success
       retries: 10
       delay: 2
-  roles:
-    - role: ericsysmin.databases.pgadmin4
+  tasks:
+    - name: Run the Ansible role
+      ansible.builtin.include_role:
+        name: ericsysimn.databases.pgadmin4
