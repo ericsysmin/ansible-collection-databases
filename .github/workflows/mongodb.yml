@@ -21,7 +21,6 @@ jobs:
       fail-fast: true
       matrix:
         molecule_distro:
-          - { distro: ubuntu-16.04, command: /sbin/init }
           - { distro: ubuntu-18.04, command: /lib/systemd/systemd }
           - { distro: ubuntu-20.04, command: /lib/systemd/systemd }
           - { distro: debian-9, command: /lib/systemd/systemd }
