@@ -15,4 +15,4 @@
   tasks:
     - name: Run the Ansible role
       ansible.builtin.include_role:
-        name: ericsysimn.databases.pgadmin4
+        name: ericsysmin.databases.pgadmin4
