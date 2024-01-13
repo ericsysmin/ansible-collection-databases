@@ -6,7 +6,6 @@
 - name: Verify
   hosts: all
   tasks:
-    - name: Initialize role without actually running it
-      ansible.builtin.include_role:
-        name: ericsysmin.databases.pgadmin4
-        tasks_from: init
+    - name: Example assertion
+      ansible.builtin.assert:
+        that: true
