@@ -1,5 +1,5 @@
 ---
-dist: bionic
+dist: focal
 os: linux
 language: python
 services:
@@ -10,8 +10,8 @@ before_install:
 
 env:
   global:
-    - COLLECTION_NAMESPACE: ericsysmin
-    - COLLECTION_NAME: databases
+    - COLLECTION_NAMESPACE=ericsysmin
+    - COLLECTION_NAME=databases
   jobs:
     # Molecule tests for chrony
     - ROLE=chrony MOLECULE_DISTRO=centos-7 MOLECULE_COMMAND=/usr/sbin/init
