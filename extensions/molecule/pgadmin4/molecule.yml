@@ -11,7 +11,7 @@ lint: |
   ansible-lint
 platforms:
   - name: instance
-    image: ${MOLECULE_DISTRO:-ubuntu:xenial}
+    image: ${MOLECULE_DISTRO:-ubuntu-focal}
     privileged: true
     command: ${MOLECULE_COMMAND:-"sleep infinity"}
     volumes:
