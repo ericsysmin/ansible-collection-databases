@@ -15,12 +15,12 @@
     filename: mongodb-org-{{ mongodb_ver }}
     update_cache: true
 
-- name: MongoDB | Install mongodb-org
+- name: MongoDB | Install mongodb-mongosh
   ansible.builtin.apt:
     name: mongodb-org
   when: mongodb_install_service
 
 - name: MongoDB | Install mongodb client
   ansible.builtin.apt:
-    name: mongodb-org-shell
+    name: mongodb-mongosh
   when: mongodb_install_client
