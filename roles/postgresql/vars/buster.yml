@@ -1,4 +1,0 @@
----
-# code: language=ansible
-
-postgresql_psycopg2: python-psycopg2

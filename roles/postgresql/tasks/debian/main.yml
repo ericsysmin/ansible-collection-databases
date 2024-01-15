@@ -24,5 +24,3 @@
   ansible.builtin.apt:
     name:
       - postgresql-{{ postgresql_version }}
-      - "{{ postgresql_psycopg2 }}"
-    update_cache: true
