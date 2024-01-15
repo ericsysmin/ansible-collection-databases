@@ -15,7 +15,7 @@
     filename: mongodb-org-{{ mongodb_ver }}
     update_cache: true
 
-- name: MongoDB | Install mongodb-mongosh
+- name: MongoDB | Install mongodb server 
   ansible.builtin.apt:
     name: mongodb-org
   when: mongodb_install_service

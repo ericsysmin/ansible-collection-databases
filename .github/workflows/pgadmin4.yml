@@ -23,6 +23,7 @@ jobs:
         molecule_distro:
           - { distro: ubuntu-18.04, command: /lib/systemd/systemd }
           - { distro: ubuntu-20.04, command: /lib/systemd/systemd }
+          - { distro: ubuntu-22.04, command: /lib/systemd/systemd }
           - { distro: debian-10, command: /lib/systemd/systemd }
         collection_role:
           - pgadmin4
