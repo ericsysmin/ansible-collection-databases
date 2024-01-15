@@ -3,6 +3,9 @@
 
 # tasks file for postgresql
 
+- name: PostgreSQL | OS Specific variables
+  ansible.builtin.include_vars: "{{ ansible_distribution | lower }}.yml"
+
 - name: PostgreSQL | OS Specific installation
   ansible.builtin.include_tasks: "{{ ansible_os_family | lower }}/main.yml"
 
