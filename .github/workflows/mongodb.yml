@@ -22,6 +22,7 @@ jobs:
       matrix:
         molecule_distro:
           - { distro: ubuntu-20.04, command: /lib/systemd/systemd }
+          - { distro: ubuntu-22.04, command: /lib/systemd/systemd }
           - { distro: debian-11, command: /lib/systemd/systemd }
         collection_role:
           - mongodb
