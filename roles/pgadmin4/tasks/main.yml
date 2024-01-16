@@ -1,5 +1,7 @@
 ---
+# code: language=ansible
+
 # tasks file for postgresql
 
-- name: pgAdmin4 | OS Specific install
-  ansible.builtin.include_tasks: "{{ ansible_os_family|lower }}.yml"
+- name: PgAdmin4 | OS Specific install
+  ansible.builtin.include_tasks: "{{ ansible_os_family | lower }}.yml"

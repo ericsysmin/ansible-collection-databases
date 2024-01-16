@@ -1,0 +1,28 @@
+ancestor: null
+releases:
+  1.1.0:
+    release_date: "2024-01-16"
+    changes:
+      release_summary: Update to the ericsysmin.database collection to meet new
+        ansible-lint requirements and updates to the molecule testing on
+        GitHub Actions.
+      removed_features:
+        - mongodb role - Removed support for Ubuntu 18.04
+        - mongodb role - Removed support for Debian 10
+        - postgresql role - Removed support for Debian 10
+      major_changes:
+        - mongodb Role - Added support for Ubuntu 22.04
+        - postgresql Role - Added support for Debian 11
+        - pgadmin4 Role - Added support for Ubuntu 22.04
+        - pgadmin4 Role - Added support for Debian 11
+    objects:
+      role:
+        - name: mongodb
+          description: Role to configure MongoDB and install MongoDB CLI
+          namespace: null
+        - name: pgadmin4
+          description: Role to configure PgAdmin4 application and server.
+          namespace: null
+        - name: postgresql
+          description: Role to install Postgresql database.
+          namespace: null

@@ -1,4 +1,6 @@
 ---
+# code: language=ansible
+
 - name: PostgreSQL | Install postgresql dependencies
   ansible.builtin.apt:
     name:
@@ -22,5 +24,3 @@
   ansible.builtin.apt:
     name:
       - postgresql-{{ postgresql_version }}
-      - "{{ postgresql_psycopg2 }}"
-    update_cache: true

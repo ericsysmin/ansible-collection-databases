@@ -1,6 +1,7 @@
 ---
+# code: language=ansible
 # defaults file for mongodb
 
 mongodb_install_service: true
 mongodb_install_client: true
-mongodb_ver: 4.4
+mongodb_ver: 7.0
