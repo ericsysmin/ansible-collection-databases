@@ -9,7 +9,8 @@
       - gnupg
 
 - name: PostgreSQL | Install
-  when: (ansible_distribution == "Ubuntu" and ansible_distribution_version != "18.04")
+  when: (ansible_distribution == "Ubuntu" and ansible_distribution_version != "18.04") or
+    (ansible_distribution == "Debian")
   block:
     - name: PostgreSQL | Add apt key
       ansible.builtin.apt_key:
