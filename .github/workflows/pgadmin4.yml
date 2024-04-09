@@ -33,11 +33,6 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v4
-        with:
-          path: collections/ansible_collections/ericsysmin/databases
-      
-      - name: run test
-        run: pwd
 
       - name: Set up Python 3.12
         uses: actions/setup-python@v5
@@ -51,8 +46,11 @@ jobs:
           sudo sh get-docker.sh
           python -m pip install --upgrade pip
           pip install ansible molecule yamllint ansible-lint molecule-plugins[docker] docker
+      
+      - name: Install collection
+        run: ansible-galaxy collection install .
 
-      - name: Run role tests
+      - name: Run tests
         run: >-
           molecule --version &&
           ansible --version &&
