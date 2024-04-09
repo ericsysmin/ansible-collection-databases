@@ -1,2 +1,7 @@
 ---
-mongodb_repository: "deb https://repo.mongodb.org/apt/debian {{ ansible_distribution_release }}/mongodb-org/{{ mongodb_ver }} multiverse"
+# code: language=ansible
+
+mongodb_repository: deb [ signed-by=/usr/share/keyrings/mongodb-server-7.0.gpg ]
+  https://repo.mongodb.org/apt/debian
+  {{ ansible_distribution_release }}/mongodb-org/{{ mongodb_ver }}
+  main

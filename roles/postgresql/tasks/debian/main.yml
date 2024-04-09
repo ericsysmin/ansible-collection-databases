@@ -1,4 +1,6 @@
 ---
+# code: language=ansible
+
 - name: PostgreSQL | Install postgresql dependencies
   ansible.builtin.apt:
     name:
@@ -6,21 +8,28 @@
       - ca-certificates
       - gnupg
 
-- name: PostgreSQL | Add apt key
-  ansible.builtin.apt_key:
-    url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
-    state: present
+- name: PostgreSQL | Install
+  when: (ansible_distribution == "Ubuntu" and ansible_distribution_version != "18.04") or
+    (ansible_distribution == "Debian")
+  block:
+    - name: PostgreSQL | Add apt key
+      ansible.builtin.apt_key:
+        url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
+        state: present
 
-- name: PostgreSQL | Add postgresql repository
-  ansible.builtin.apt_repository:
-    repo: deb http://apt.postgresql.org/pub/repos/apt {{ ansible_distribution_release }}-pgdg main
-    state: present
-    filename: pgdg
-    update_cache: true
+    - name: PostgreSQL | Add postgresql repository
+      ansible.builtin.apt_repository:
+        repo: deb http://apt.postgresql.org/pub/repos/apt {{ ansible_distribution_release }}-pgdg main
+        state: present
+        filename: pgdg
+        update_cache: true
 
-- name: PostgreSQL | Install postgresql
+    - name: PostgreSQL | Install postgresql
+      ansible.builtin.apt:
+        name:
+          - postgresql-{{ postgresql_version }}
+
+- name: PostgreSQL | Install Apt
+  when: (ansible_distribution == "Ubuntu" and ansible_distribution_version == "18.04")
   ansible.builtin.apt:
-    name:
-      - postgresql-{{ postgresql_version }}
-      - "{{ postgresql_psycopg2 }}"
-    update_cache: true
+    name: postgresql

@@ -1,12 +1,18 @@
 ---
+# code: language=ansible
 
 - name: MongoDB | Install dependent package
   ansible.builtin.apt:
-    name: gnupg
+    name:
+      - curl
+      - ca-certificates
+      - gnupg
 
 - name: MongoDB | Import apt key
   ansible.builtin.apt_key:
     url: https://www.mongodb.org/static/pgp/server-{{ mongodb_ver }}.asc
+    keyring: /usr/share/keyrings/mongodb-server-{{ mongodb_ver }}.gpg
+    state: present
 
 - name: MongoDB | Add apt repository
   ansible.builtin.apt_repository:
@@ -14,12 +20,12 @@
     filename: mongodb-org-{{ mongodb_ver }}
     update_cache: true
 
-- name: MongoDB | Install mongodb-org
+- name: MongoDB | Install mongodb server
   ansible.builtin.apt:
     name: mongodb-org
   when: mongodb_install_service
 
 - name: MongoDB | Install mongodb client
   ansible.builtin.apt:
-    name: mongodb-org-shell
+    name: mongodb-mongosh
   when: mongodb_install_client

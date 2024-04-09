@@ -1,18 +1,19 @@
-name: "ericsysmin.databases.pgadmin4"
+---
+name: ericsysmin.databases.pgadmin4
 on:
   push:
     paths:
-      - 'roles/pgadmin4/**'
-      - 'molecule/pgadmin4/**'
-      - '.github/workflows/pgadmin4.yml'
+      - roles/pgadmin4/**
+      - molecule/pgadmin4/**
+      - .github/workflows/pgadmin4.yml
   pull_request:
     paths:
-      - 'roles/pgadmin4/**'
-      - 'molecule/pgadmin4/**'
-      - '.github/workflows/pgadmin4.yml'
+      - roles/pgadmin4/**
+      - molecule/pgadmin4/**
+      - .github/workflows/pgadmin4.yml
 jobs:
   pgadmin4:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     env:
       PY_COLORS: 1
       ANSIBLE_FORCE_COLOR: 1
@@ -20,23 +21,23 @@ jobs:
       fail-fast: true
       matrix:
         molecule_distro:
-          - { "distro":"ubuntu-16.04", "command":"/sbin/init" }
-          - { "distro":"ubuntu-18.04", "command":"/lib/systemd/systemd" }
-          - { "distro":"ubuntu-20.04", "command":"/lib/systemd/systemd" }
-          - { "distro":"debian-9", "command":"/lib/systemd/systemd" }
-          - { "distro":"debian-10", "command":"/lib/systemd/systemd" }
+          - { distro: ubuntu-18.04, command: /lib/systemd/systemd }
+          - { distro: ubuntu-20.04, command: /lib/systemd/systemd }
+          - { distro: ubuntu-22.04, command: /lib/systemd/systemd }
+          # - { distro: ubuntu-24.04, command: /lib/systemd/systemd }
+          - { distro: debian-10, command: /lib/systemd/systemd }
+          - { distro: debian-11, command: /lib/systemd/systemd }
+          - { distro: debian-12, command: /lib/systemd/systemd }
         collection_role:
           - pgadmin4
     steps:
       - name: Check out code
-        uses: actions/checkout@v1
-        with:
-          path: ansible_collections/ericsysmin/databases
+        uses: actions/checkout@v4
 
-      - name: Set up Python 3.8
-        uses: actions/setup-python@v1
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
         with:
-          python-version: 3.8
+          python-version: 3.12
 
       - name: Install dependencies
         run: |
@@ -44,9 +45,12 @@ jobs:
           curl -fsSL https://get.docker.com -o get-docker.sh
           sudo sh get-docker.sh
           python -m pip install --upgrade pip
-          pip install ansible molecule yamllint ansible-lint docker molecule-docker
+          pip install ansible molecule yamllint ansible-lint molecule-plugins[docker] docker
+      
+      - name: Install collection
+        run: ansible-galaxy collection install .
 
-      - name: Run role tests
+      - name: Run tests
         run: >-
           molecule --version &&
           ansible --version &&

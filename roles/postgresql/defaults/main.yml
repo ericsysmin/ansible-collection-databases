@@ -1,5 +1,6 @@
 ---
+# code: language=ansible
+
 # defaults file for postgresql
 
 postgresql_version: 12
-postgresql_psycopg2: python-psycopg2
